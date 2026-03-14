@@ -412,10 +412,10 @@ def build_pdf(topic: str, lessons: list, citations: list, output_path: str):
 # ── Research engine ───────────────────────────────────────────────────────────
 def do_research(client: anthropic.Anthropic, topic: str, depth: str) -> dict:
     depth_map = {
-        "1": "3 lessons. Each lesson: 2 subsections, each with 3 paragraphs and 3 keypoints.",
-        "2": "5 lessons. Each lesson: 3 subsections, each with 4 paragraphs and 4 keypoints.",
-        "3": "7 lessons. Each lesson: 4 subsections, each with 5 paragraphs and 5 keypoints.",
-    }
+    "1": "Generate exactly 1 lesson with 1 subsection and 1 short paragraph",
+    "2": "Generate exactly 2 lessons with 1 subsection each and 1 short paragraph",
+    "3": "Generate exactly 3 lessons with 2 subsections each and 2 short paragraphs",
+}
 
     SYSTEM = f"""You are an expert educator and researcher. Create a structured, step-by-step educational course on the given topic — like a university textbook.
 
@@ -458,7 +458,7 @@ Requirements:
     print("\n  🔍  Searching the web and gathering sources...")
     response = client.messages.create(
         model="claude-sonnet-4-6",
-        max_tokens=12000,
+        max_tokens=4000,
         system=SYSTEM,
         tools=[{"type": "web_search_20250305", "name": "web_search"}],
         messages=[{
@@ -514,7 +514,7 @@ Requirements:
         print("  🔧  Repairing JSON structure...")
         fix_response = client.messages.create(
             model="claude-sonnet-4-6",
-            max_tokens=12000,
+            max_tokens=4000,
             system='Return ONLY valid raw JSON. No markdown. No explanation. Start with {',
             messages=[{
                 "role": "user",
