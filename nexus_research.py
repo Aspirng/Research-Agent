@@ -457,7 +457,7 @@ Requirements:
 
     print("\n  🔍  Searching the web and gathering sources...")
     response = client.messages.create(
-        model="claude-sonnet-4-20250514",
+        model="claude-sonnet-4-6",
         max_tokens=12000,
         system=SYSTEM,
         tools=[{"type": "web_search_20250305", "name": "web_search"}],
@@ -513,7 +513,7 @@ Requirements:
     if not (parsed and parsed.get("lessons")):
         print("  🔧  Repairing JSON structure...")
         fix_response = client.messages.create(
-            model="claude-sonnet-4-20250514",
+            model="claude-sonnet-4-6",
             max_tokens=12000,
             system='Return ONLY valid raw JSON. No markdown. No explanation. Start with {',
             messages=[{
