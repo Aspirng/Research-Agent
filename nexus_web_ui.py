@@ -269,7 +269,7 @@ def run_research(job_id, api_key, topic):
 
     finally:
         if original_key is not None:
-            try:
+            try: 
                 ra.API_KEY = original_key
             except Exception:
                 pass
