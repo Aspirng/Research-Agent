@@ -25,7 +25,7 @@ def _default_depth() -> str:
     """
     Use the recommended "Standard" depth (5 lessons) for the web UI.
     """
-    return "2"
+       return "1"
 
 
 def _render_page(message: str = "", download_url: str | None = None):
